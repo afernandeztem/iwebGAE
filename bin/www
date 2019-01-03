@@ -4,7 +4,7 @@
 Leer el archivo .env antes de lanzar cualquier cosa
 */
 
-const dotenv = require('dotenv'); 
+const dotenv = require('dotenv');
 dotenv.config();
 
 /**
@@ -12,7 +12,7 @@ dotenv.config();
  */
 
 var app = require('../app');
-var debug = require('debug')('plantilla-express:server');
+var debug = require('debug')('iwebGAE:server');
 var http = require('http');
 
 /**

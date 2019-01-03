@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+/*
+Leer el archivo .env antes de lanzar cualquier cosa
+*/
+
+const dotenv = require('dotenv'); 
+dotenv.config();
+
 /**
  * Module dependencies.
  */

@@ -16,6 +16,8 @@
     "morgan": "~1.9.0"
   },
   "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-bbva": "^2.0.3",
     "nodemon": "^1.18.9"
   }
 }

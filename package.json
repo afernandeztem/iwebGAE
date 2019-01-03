@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "server": "nodemon --watch routes --watch bin --watch app.js npm run start"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -13,5 +14,8 @@
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }

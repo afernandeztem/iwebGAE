@@ -16,6 +16,7 @@ Para arrancar la aplicación ejecuta `npm run start`, si quieres ejecutar la apl
 ## IDE Packages
 
 Visual Studio Code
+
 *Beautify
 
 *EditorConfig for VS Code

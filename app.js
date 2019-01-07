@@ -2,10 +2,12 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const loginRouter = require('./routes/login');
+const seriesRouter = require('./routes/series');
 
 const app = express();
 
@@ -18,11 +20,21 @@ app.use(express.json());
 app.use(express.urlencoded({
 	extended: false
 }));
+
+
+app.use(cookieSession({
+	name: 'session',
+	keys: ['hello'],
+	maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', loginRouter);
+app.use('/', seriesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

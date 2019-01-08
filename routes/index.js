@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   console.log(req.session.passport)
   if (req.session && req.session.passport) {
-    return res.redirect('/welcome');
+    return res.redirect('/series');
   }
 
   const logout = req.query.logout;

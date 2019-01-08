@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const database = require('../lib/db');
 const passport = require('../lib/passport');
 
 router.use(passport.initialize());
@@ -11,23 +10,19 @@ router.get('/auth/google',
 	})
 );
 
-
 router.get('/auth/google/callback',
 	passport.authenticate('google', {
 		failureRedirect: '/'
 	}),
 	(req, res) => {
 		req.session.passport = req.user;
-		res.redirect('/series');
+		res.redirect('/welcome');
 	}
 );
 
-
-// Logout endpoint
 router.get('/logout', (req, res) => {
-    req.session = null;
-    res.redirect('/?logout=true');
+	req.session = null;
+	res.redirect('/?logout=true');
 });
-
 
 module.exports = router;

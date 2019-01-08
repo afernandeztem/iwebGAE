@@ -16,7 +16,7 @@ router.get('/auth/google/callback',
 	}),
 	(req, res) => {
 		req.session.passport = req.user;
-		res.redirect('/welcome');
+		res.redirect('/series');
 	}
 );
 

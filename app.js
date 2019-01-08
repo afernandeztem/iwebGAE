@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
 const logger = require('morgan');
 
+
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const seriesRouter = require('./routes/series');
@@ -12,6 +13,8 @@ const misEntregasRouter = require('./routes/misEntregas');
 
 
 const app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

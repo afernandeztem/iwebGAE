@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-	console.log(req.session.passport)
+	//console.log(req.session.passport)
 	if (req.session && req.session.passport) {
 		return res.redirect('/series');
 	}

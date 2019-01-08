@@ -9,3 +9,10 @@ block content
   a(href='/series/add') Añadir Serie
   br
   a(href='/logout') Logout
+
+  each serie in series
+    div 
+      h1 #{serie.titulo}
+      p #{serie.categoria}
+      p #{serie.descripcion}
+      img(src=#{serie.imagen})

@@ -8,7 +8,7 @@ router.use(authMiddleware);
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-	const series = await serieDriver.getSeries;
+	const series = await serieDriver.getSeries();
 	res.render('series', {
 		series: series ? series : []
 	});

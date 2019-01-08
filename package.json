@@ -7,6 +7,7 @@
     "server": "nodemon --watch routes --watch bin --watch app.js npm run start"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "debug": "~2.6.9",

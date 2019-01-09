@@ -20,16 +20,23 @@ router.get('/auth/google/callback',
 		failureRedirect: '/'
 	}),
 	async (req, res) => {
-		/*console.log(user);
-		if (user === undefined) {
-			console.log('WEEEEEEEEEEEEEEEEEEEEEEEEEEE');
-		}*/
+		// Guardo el usuario en la cookie de sesión
 		req.session.passport = req.user;
-		let data = req.session.passport;
-		let email = data.profile.emails[0].value;
-		console.log(data.profile.emails[0]);
-		console.log(email);
-
+		// Obtengo el email del usuario para buscarlo en la BD
+		const data = req.session.passport;
+		const email = data.profile.emails[0].value;
+		const nombre = data.profile.displayName;
+		// Espero a que mi usuario sea encontrado en la BD o sea []
+		let usuario = await usuarioDriver.getUsuario(email);
+		// Si el array que me devuelve la BD está vacío, quiere decir que el usuario no existe, lo creo
+		if (usuario.length === 0) {
+			await usuarioDriver.addUsuario(email, nombre);
+			console.log('Usuario insertado correctamente!!!!!!!!!!!!!!!!!!!!!!!');
+			usuario = await usuarioDriver.getUsuario(email);
+		}
+		//Muestro los datos del usuario por consola porque me apetece
+		console.log('USUARIO LOGEADO');
+		console.log(usuario);
 		res.redirect('/series');
 	}
 );

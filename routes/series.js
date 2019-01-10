@@ -10,30 +10,41 @@ router.use(authMiddleware);
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
+	// Obtengo todas las series
 	const series = await serieDriver.getSeries();
 
+	// Las muestro en series.jade
 	res.render('series', {
 		series: series ? series : []
 	});
 });
 
 
-/* GET users listing. */
-router.get('/add', (req, res, next) => {
-	res.render('addSerie', {});
+router.get('/add', async (req, res, next) => {
+	// Obtengo el email del usuario para que la serie tenga ese dueño
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+	const serie = {
+		titulo: 'pruebaSerie1',
+		categoria: 'pruebaSerie1',
+		descripcion: 'pruebaSerie1',
+		usuario: email
+	}
+
+	await serieDriver.addSerie(serie);
+	res.redirect('/series');
 });
 
 /* GET users listing. */
 router.get('/comentarios', async (req, res, next) => {
-	// Obtengo la ide de la serie
+	// Obtengo la id de la serie
 	const id = req.query.id;
-	// Obtengo la id de los comentarios de la serie
-	const idComentarios = await serieDriver.getidComentarios(id);
-	// Obtengo los comentarios
-	const comentarios = await comentarioDriver.getComentarios(idComentarios);
+	// Obtengo los comentarios que tienen como dueño a esa serie
+	const comentarios = await comentarioDriver.getComentarios(id);
 
 	res.render('comentarios', {
-		comentarios: comentarios ? comentarios : []
+		comentarios: comentarios ? comentarios : [],
+		idSerie: id
 	});
 });
 

@@ -1,8 +1,11 @@
 extends layout
 
 block content
+  a(href='/comentarios/add?id='+idSerie) Añadir Comentario
   h1 "Aquí van los comentarios de la serie"
   each comentario in comentarios
     div
+      - const id = comentario.id
       p Encabezado: #{comentario.encabezado}
       p Contenido:  #{comentario.contenido}
+      a(href='/comentarios/eliminar?id=' + id ) Eliminar

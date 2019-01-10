@@ -12,7 +12,7 @@ block content
 
   each serie in series
     div
-      - const id = serie.idSerie
+      - const id = serie.id
       a(href='/series/comentarios?id=' + id ) #{serie.titulo}
       p #{serie.categoria}
       p #{serie.descripcion}

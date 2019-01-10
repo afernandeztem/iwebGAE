@@ -10,6 +10,8 @@ const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const seriesRouter = require('./routes/series');
 const misEntregasRouter = require('./routes/misEntregas');
+const comentariosRouter = require('./routes/comentarios');
+
 
 
 const app = express();
@@ -41,6 +43,8 @@ app.use('/', indexRouter);
 app.use('/', loginRouter);
 app.use('/series', seriesRouter);
 app.use('/', misEntregasRouter);
+app.use('/comentarios', comentariosRouter);
+
 
 
 // catch 404 and forward to error handler

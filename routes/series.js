@@ -12,7 +12,6 @@ router.use(authMiddleware);
 router.get('/', async (req, res, next) => {
 	// Obtengo todas las series
 	const series = await serieDriver.getSeries();
-
 	// Las muestro en series.jade
 	res.render('series', {
 		series: series ? series : []
@@ -24,13 +23,14 @@ router.get('/add', async (req, res, next) => {
 	// Obtengo el email del usuario para que la serie tenga ese dueño
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
+	// Creo la serie a introducir (cambiar por formulario)
 	const serie = {
 		titulo: 'pruebaSerie1',
 		categoria: 'pruebaSerie1',
 		descripcion: 'pruebaSerie1',
 		usuario: email
 	}
-
+	// La introduzco
 	await serieDriver.addSerie(serie);
 	res.redirect('/series');
 });
@@ -41,7 +41,7 @@ router.get('/comentarios', async (req, res, next) => {
 	const id = req.query.id;
 	// Obtengo los comentarios que tienen como dueño a esa serie
 	const comentarios = await comentarioDriver.getComentarios(id);
-
+	// Renderizamos comentarios.jade con los atributos siguientes
 	res.render('comentarios', {
 		comentarios: comentarios ? comentarios : [],
 		idSerie: id

@@ -3,13 +3,13 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-	//console.log(req.session.passport)
+	// Si hay sesión iniciada
 	if (req.session && req.session.passport) {
 		return res.redirect('/series');
 	}
-
+	// Si no obtengo el parametro logout
 	const logout = req.query.logout;
-
+	// Renderizo index
 	res.render('index', {
 		title: 'Drawdede',
 		logout: logout

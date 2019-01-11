@@ -1,0 +1,9 @@
+mixin serie(serie, button)
+  .material-card
+    img.card-img-top(src=serie.image, alt='Card image cap')
+    .card-body
+      h5.card-title #{serie.titulo}
+      p.card-text
+        | #{serie.descripcion}
+      if button
+        a.btn.btn-primary(href='/series/comentarios?id=' + serie.id) Ver comentarios

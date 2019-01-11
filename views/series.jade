@@ -1,18 +1,15 @@
 extends layout
 
-block content
-  h1 "Aquí van las series"
-  a(href='/series/') Series
-  br
-  a(href='/misEntregas') MisEntregas
-  br
-  a(href='/series/add') Añadir Serie
-  br
-  a(href='/logout') Logout
+include ./mixins/serie
 
-  each serie in series
-    div
-      - const id = serie.id
-      a(href='/series/comentarios?id=' + id ) #{serie.titulo}
-      p #{serie.categoria}
-      p #{serie.descripcion}
+block content
+  a(href='/series/add') Añadir Serie
+
+  .card-group
+      each serie in series
+        div
+        +serie(serie,true)
+          //- const id = serie.id
+          //a(href='/series/comentarios?id=' + id ) #{serie.titulo}
+          //p #{serie.categoria}
+          //p #{serie.descripcion}

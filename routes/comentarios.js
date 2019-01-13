@@ -27,24 +27,38 @@ router.get('/eliminar', async (req, res, next) => {
 });
 
 
+// GET: Add new Comentarios
+router.get('/add', (req, res, next) => {
+	console.log('PARAMETRO: id = ' + req.query.id);
+    res.render('addComentario', {
+		title: 'Add comentarios',
+		id: req.query.id,
+        comentario: {}
+    });
+});
+
+
 /* GET users listing. */
-router.get('/add', async (req, res, next) => {
+router.post('/add', async (req, res, next) => {
 	// Obtengo la id de la serie a la que va a pertenecer mi comentario
 	const id = req.query.id;
 	// Obtengo el email del usuario logueado para asociarlo al comentario
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
 	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
-	const comentario = {
-		titulo: 'pruebaComentario1',
-		contenido: 'pruebaComentario1',
-		usuario: email,
-		idSerie: id
-	}
 
-	// Añado el comentario
-	await comentarioDriver.addComentario(comentario);
-	res.redirect('/');
+
+	const comentario = req.body;
+	console.log('Cuerpaso title ' + req.body.titulo);
+	console.log('Cuerpaso content ' + req.body.contenido);
+	console.log('Cuerpaso idSerie ' + req.body.idSerie);
+
+	//try {
+		await comentarioDriver.addComentario(comentario);
+		res.redirect('/');
+	//} catch (e) {
+	//	res.redirect('comentarios/add?error=true');
+	//}
 });
 
 

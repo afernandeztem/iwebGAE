@@ -29,8 +29,7 @@ router.get('/eliminar', async (req, res, next) => {
 
 // GET: Add new Comentarios
 router.get('/add', (req, res, next) => {
-	console.log('PARAMETRO: id = ' + req.query.id);
-    res.render('addComentario', {
+	res.render('addComentario', {
 		title: 'Add comentarios',
 		id: req.query.id,
         comentario: {}
@@ -48,10 +47,13 @@ router.post('/add', async (req, res, next) => {
 	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
 
 
-	const comentario = req.body;
-	console.log('Cuerpaso title ' + req.body.titulo);
-	console.log('Cuerpaso content ' + req.body.contenido);
-	console.log('Cuerpaso idSerie ' + req.body.idSerie);
+	const comentario =  {
+		titulo: req.body.titulo,
+		contenido: req.body.contenido,
+		idSerie: req.body.idSerie,
+		usuario: email
+	}
+
 
 	//try {
 		await comentarioDriver.addComentario(comentario);

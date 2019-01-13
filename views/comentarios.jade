@@ -1,16 +1,9 @@
 extends layout
+include ./mixins/comentario
 block content
   a(href='/comentarios/add?id='+idSerie) Añadir Comentario
-  h1 Comentarios:
-    br
-    br
-    .card-group
-    each comentario in comentarios
-       div
-       - const id = comentario.id
-       h3 Título: #{comentario.titulo}
-       h3 Contenido:  #{comentario.contenido}
-       a(href='/comentarios/eliminar?id=' + id ) Eliminar
-       br
-       br
-       br
+  .card-group
+      each comentario in comentarios
+        div
+        +comentario(comentario,true)
+        br

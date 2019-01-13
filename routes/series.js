@@ -20,20 +20,36 @@ router.get('/', async (req, res, next) => {
 
 
 router.get('/add', async (req, res, next) => {
-	// Obtengo el email del usuario para que la serie tenga ese dueño
+	res.render('addSerie', {
+		title: 'Add series',
+		id: req.query.id,
+        serie: {}
+    });
+});
+
+/* GET users listing. */
+router.post('/add', async (req, res, next) => {
+	// Obtengo el email del usuario logueado para asociarlo al a la serie
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
-	// Creo la serie a introducir (cambiar por formulario)
+
 	const serie = {
-		titulo: 'pruebaSerie1',
-		categoria: 'pruebaSerie1',
-		descripcion: 'pruebaSerie1',
-		usuario: email
+		titulo: req.body.titulo,
+		categoria: req.body.categoria,
+		descripcion: req.body.descripcion,
+		usuario: email,
+		//La imagen no sé de dónde se sacaría
+		//imagen: //TODO:
+
 	}
-	// La introduzco
-	await serieDriver.addSerie(serie);
-	res.redirect('/series');
+	//try {
+		await serieDriver.addSerie(serie);
+		res.redirect('/');
+	//} catch (e) {
+	//	res.redirect('comentarios/add?error=true');
+	//}
 });
+
 
 /* GET users listing. */
 router.get('/comentarios', async (req, res, next) => {
@@ -42,6 +58,7 @@ router.get('/comentarios', async (req, res, next) => {
 	// Obtengo los comentarios que tienen como dueño a esa serie
 	const comentarios = await comentarioDriver.getComentarios(id);
 	// Renderizamos comentarios.jade con los atributos siguientes
+	console.log("SERIES.JS ID: "+ id);
 	res.render('comentarios', {
 		comentarios: comentarios ? comentarios : [],
 		idSerie: id

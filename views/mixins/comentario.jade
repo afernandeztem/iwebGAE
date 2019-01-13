@@ -1,6 +1,9 @@
 mixin comentario(comentario)
-  .material-card
-    img.card-img-top(src=serie.imagen, alt='Card image cap',height='200', width='400')
+   .material-card
     .card-body
-      h5.card-title #{comentario.titulo}
-      p.card-text #{comentario.contenido}
+       - const id = comentario.id
+       h5.card-title #{comentario.titulo}
+       p.card-text #{comentario.contenido}
+       a(href='/comentarios/eliminar?id=' + id ) Eliminar
+       br
+       br

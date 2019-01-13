@@ -1,6 +1,10 @@
 mixin serie(serie, button)
   .material-card
-    img.card-img-top(src=serie.imagen, alt='Card image cap',height='200', width='400')
+    - if (typeof(serie.imagen) !== 'undefined'){
+      img.card-img-top(src=serie.imagen, alt='Card image cap',height='200', width='400')
+    -} else {
+      img.card-img-top(src="/drawable/nyan.png", alt='Default3',height='200', width='400')
+    -}
     .card-body
       h5.card-title #{serie.titulo}
       p.card-text

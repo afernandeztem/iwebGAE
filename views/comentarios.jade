@@ -1,9 +1,14 @@
 extends layout
 include ./mixins/comentario
 block content
-  a(href='/comentarios/add?id='+idSerie) Añadir Comentario
-  .card-group
+   a(href='/comentarios/add?id='+idSerie) Añadir Comentario
+   .card-group
       each comentario in comentarios
-        div
-        +comentario(comentario,true)
-        br
+       if comentario.usuario === emailLogged
+           div
+           +comentario(comentario,false)
+           br
+       else
+           div
+           +comentario(comentario,true)
+           br

@@ -98,11 +98,17 @@ router.get('/comentarios', async (req, res, next) => {
 	const id = req.query.id;
 	// Obtengo los comentarios que tienen como dueño a esa serie
 	const comentarios = await comentarioDriver.getComentarios(id);
+	//Obtengo el email para ver si soy el dueño del comentario
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+
+
+
 	// Renderizamos comentarios.jade con los atributos siguientes
-	console.log("SERIES.JS ID: "+ id);
 	res.render('comentarios', {
 		comentarios: comentarios ? comentarios : [],
-		idSerie: id
+		idSerie: id,
+		emailLogged: email
 	});
 });
 

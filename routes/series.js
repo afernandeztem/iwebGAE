@@ -89,4 +89,22 @@ router.get('/peliculas', async (req, res, next) => {
 	});
 });
 
+router.get('/eliminar', async (req, res, next) => {
+	//id de la serie
+	const id = req.query.id;
+	// Obtengo el email del usuario que ha creado la serie
+	const emailSerie = await serieDriver.getUsuarioSerie(id);
+	
+	const data = req.session.passport;
+	console.log(data);
+	const email = data.profile.emails[0].value;
+	if(emailSerie === email){
+		console.log('PERMISO PARA ELIMINAR SERIE');
+		await serieDriver.deleteSerie(id);
+	}
+	
+
+	res.redirect('/');
+});
+
 module.exports = router;

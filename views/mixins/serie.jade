@@ -10,5 +10,6 @@ mixin serie(serie, button)
       p.card-text
         | #{serie.descripcion}
     a.btn.btn-primary(href='/series/comentarios?id=' + serie.id) Ver comentarios
+    a.btn.btn-primary(href='/series/eliminar?id=' + serie.id) Eliminar
       if button
         a.btn.btn-primary(href='/series/peliculas?id=' + serie.titulo) Ver películas

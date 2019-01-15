@@ -65,5 +65,28 @@ router.get('/comentarios', async (req, res, next) => {
 	});
 });
 
+/* GET users listing. */
+router.get('/peliculas', async (req, res, next) => {
+	// Obtengo la id de la serie
+	const id = req.query.id;
+
+	const Request = require('request');
+	const url = 'https://api.themoviedb.org/3/search/movie?api_key=c44f3d48c47012b24473934393cf026c&language=es-ES&query=';
+	const url_ = '&page=1&include_adult=false';
+	const url_get = url + encodeURIComponent(id) + url_;
+
+	Request.get(url_get , (error, response, body) => {
+		if (error) {
+			return console.dir(error);
+		}
+		const peliculas = JSON.parse(body);
+		const results = peliculas.results;
+
+		res.render('peliculas', {
+			peliculas: results ? results : [],
+			idSerie: id
+		});
+	});
+});
 
 module.exports = router;

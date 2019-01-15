@@ -9,5 +9,6 @@ mixin serie(serie, button)
       h5.card-title #{serie.titulo}
       p.card-text
         | #{serie.descripcion}
+    a.btn.btn-primary(href='/series/comentarios?id=' + serie.id) Ver comentarios
       if button
-        a.btn.btn-primary(href='/series/comentarios?id=' + serie.id) Ver comentarios
+        a.btn.btn-primary(href='/series/peliculas?id=' + serie.titulo) Ver películas

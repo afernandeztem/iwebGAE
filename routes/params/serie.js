@@ -1,10 +1,10 @@
 const serieDriver = require('../../lib/datastore/serie-driver');
 
 module.exports = (router) =>
-	// Parse film ID to append the film object to the request
+	// Parse serie ID to append the serie object to the request
 	router.param('serie', async (req, res, next, serieId) => {
 		const serie = await serieDriver.getSerieById(serieId);
-
+		console.log(serie);
 		if (serie) {
 			req.film = serie;
 			next();

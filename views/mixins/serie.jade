@@ -1,15 +1,10 @@
 mixin serie(serie, button)
   .material-card
-    - if (typeof(serie.imagen) !== 'undefined'){
-      img.card-img-top(src=serie.imagen, alt='Card image cap',height='200', width='400')
-    -} else {
-      img.card-img-top(src="/drawable/nyan.png", alt='Default3',height='200', width='400')
-    -}
+    img.card-img-top(src=serie.imagen, alt='Card image cap',height='200', width='400')
     .card-body
       h5.card-title #{serie.titulo}
       p.card-text
         | #{serie.descripcion}
     a.btn.btn-primary(href='/series/comentarios?id=' + serie.id) Ver comentarios
-    a.btn.btn-primary(href='/series/eliminar?id=' + serie.id) Eliminar
       if button
         a.btn.btn-primary(href='/series/peliculas?id=' + serie.titulo) Ver películas

@@ -39,12 +39,53 @@ router.post('/add', async (req, res, next) => {
 		descripcion: req.body.descripcion,
 		usuario: email,
 		//La imagen no sé de dónde se sacaría
-		//imagen: //TODO:
-
+		imagen: '/drawable/nyan.png'
 	}
+
+	const fetch = require('node-fetch');
+	const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';
+	const url_ = 'https://source.unsplash.com/';
+	const tam = '/290x160';
+	const url_get = url + encodeURIComponent(serie.titulo);
+
+	await fetch(url_get)
+		.then((ress) => ress.json())
+		.then((json) => {
+			const imagenes = json;
+			const arrayImagenes = imagenes.results;
+			let id;
+
+			for (let i = 0; i < arrayImagenes.length; i++) {
+				if (arrayImagenes[i].height < arrayImagenes[i].width) {
+					id = arrayImagenes[i].id;
+					serie.imagen = url_ + id + tam;
+					console.log(serie);
+					break;
+				}
+			}
+		});
+
+	/*await Request.get(url_get, (error, response, body) => {
+		if (error) {
+			return console.dir(error);
+		}
+		const imagenes = JSON.parse(body);
+		const arrayImagenes = imagenes.results;
+		let id;
+
+		for (let i = 0; i < arrayImagenes.length; i++) {
+			if (arrayImagenes[i].height < arrayImagenes[i].width) {
+				id = arrayImagenes[i].id;
+				serie.imagen = url_ + id + tam;
+				console.log(serie);
+				break;
+			}
+		}
+	});*/
 	//try {
-		await serieDriver.addSerie(serie);
-		res.redirect('/');
+	console.log(serie);
+	await serieDriver.addSerie(serie);
+	res.redirect('/');
 	//} catch (e) {
 	//	res.redirect('comentarios/add?error=true');
 	//}

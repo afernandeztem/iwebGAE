@@ -5,8 +5,6 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   body
-  a.float(href='/series/add')
-    p.plus +
   .navbar.navbar-inverse.bg-inverse
       .container.d-flex.justify-content-between
         a.navbar-brand(href='/') Drawdede
@@ -14,4 +12,5 @@ html
           a.navbar-brand(href='/series/') Mis Series
           a.navbar-brand(href='/misEntregas') Mis Entregas
           a.navbar-brand(href='/logout') Logout
+          a.navbar-brand(href='/series/add') Nueva Serie
     block content

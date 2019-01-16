@@ -3,7 +3,7 @@ extends layout
 include ./mixins/serie
 
 block content
-  .card-group
+  .card-columns(style={padding:'10px', position: 'relative'})
       each serie in series
         div
         +serie(serie,true)

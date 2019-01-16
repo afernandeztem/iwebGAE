@@ -38,7 +38,6 @@ router.post('/add', async (req, res, next) => {
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
 		usuario: email,
-		//La imagen no sé de dónde se sacaría
 		imagen: '/drawable/nyan.png'
 	}
 
@@ -129,6 +128,22 @@ router.get('/eliminar', async (req, res, next) => {
 
 
 	res.redirect('/');
+});
+
+/* GET users listing. */
+router.post('/buscar', async (req, res, next) => {
+	// Obtengo el email del usuario logueado para asociarlo al a la serie
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+	const parametro = req.body.parametro;
+
+	console.log(parametro);
+
+	const series = await serieDriver.getSerieByParam(parametro);
+	// Las muestro en series.jade
+	res.render('series', {
+		series: series ? series : []
+	});
 });
 
 module.exports = router;

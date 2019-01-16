@@ -3,6 +3,7 @@ mixin comentario(comentario,intrusion)
     .card-body
        - const id = comentario.id
        h5.card-title #{comentario.titulo}
+       h7.card-text #{comentario.usuario}
        p.card-text #{comentario.contenido}
        if !intrusion
             a(href='/comentarios/edit?id=' + id ) Editar

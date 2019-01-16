@@ -11,8 +11,9 @@ html
         if passport
           a.navbar-brand(href='/misSeries/') Mis Series
           a.navbar-brand(href='/misEntregas') Mis Entregas
+          a.navbar-brand(href='/misComentarios') Mis Comentarios
           form.form-inline(method='post', action='/series/buscar')
-            input.form-control.mr-sm-2(type='search', placeholder='hola', name='parametro')
+            input.form-control.mr-sm-2(type='search', placeholder=' Buscar', name='parametro')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
           a.navbar-brand(href='/logout') Logout
           a.navbar-brand(href='/series/add') Nueva Serie

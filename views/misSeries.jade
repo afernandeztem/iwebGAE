@@ -1,0 +1,9 @@
+extends layout
+
+include ./mixins/serie
+
+block content
+    .card-group
+      each serie in series
+        div
+        +serie(serie,true)

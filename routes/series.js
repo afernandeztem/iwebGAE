@@ -31,6 +31,7 @@ router.get('/editSerie', async (req,res,next) => {
 		descripcion: serie.descripcion,
 		categoria: serie.categoria,
 		idSerie: idSerie
+		
 	} )
 	
 }

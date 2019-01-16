@@ -1,4 +1,12 @@
 extends layout
 
+include ./mixins/entrega
+
 block content
-  h1 "Aquí van mis Entregas"
+  .card-columns(style={padding:'10px', position: 'relative'})
+      each entrega in entregas
+        div
+        if emailUsuario === entrega.usuario
+            +entrega(entrega,true)
+        else
+            +entrega(entrega,false)

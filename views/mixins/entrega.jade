@@ -1,0 +1,12 @@
+mixin entrega(entrega, button)
+  .card(style={width: '100%', margin: '0 auto', margin: '5px', height: '500px'})
+
+    .card-body
+      h5.card-title #{entrega.anotacion}
+      p.card-date
+        | #{entrega.fecha_entrega}
+      div(style={margin: '20px 10px 20px', position: 'absolute', left: '0px', bottom: '0px'})
+
+        if button
+          a.btn.btn-primary(href='/entregas/eliminar?id=' + entrega.id) Eliminar
+          a.btn.btn-primary(href='/entregas/editSerie?id=' + entrega.id) Editar

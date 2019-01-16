@@ -11,13 +11,15 @@ router.get('/misSeries', async (req, res, next) => {
     //obtengo el usuario de la sesion
     const data = req.session.passport;
     const email = data.profile.emails[0].value;
-    
+	const emailUser = data.profile.emails[0].value;
+
     //obtengo las series que corresponden al usuario
     const misSeries = await serieDriver.getSeriesUsuario(email);
 
 	// Las muestro en series.jade
-	res.render('misSeries', {
-        series: misSeries ? misSeries : []
+	res.render('series', {
+		series: misSeries ? misSeries : [],
+		emailUsuario: emailUser
     });
 });
 

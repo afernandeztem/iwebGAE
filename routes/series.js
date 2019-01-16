@@ -23,8 +23,8 @@ router.get('/add', async (req, res, next) => {
 	res.render('addSerie', {
 		title: 'Add series',
 		id: req.query.id,
-        serie: {}
-    });
+		serie: {}
+	});
 });
 
 /* GET users listing. */
@@ -59,36 +59,12 @@ router.post('/add', async (req, res, next) => {
 				if (arrayImagenes[i].height < arrayImagenes[i].width) {
 					id = arrayImagenes[i].id;
 					serie.imagen = url_ + id + tam;
-					console.log(serie);
 					break;
 				}
 			}
 		});
-
-	/*await Request.get(url_get, (error, response, body) => {
-		if (error) {
-			return console.dir(error);
-		}
-		const imagenes = JSON.parse(body);
-		const arrayImagenes = imagenes.results;
-		let id;
-
-		for (let i = 0; i < arrayImagenes.length; i++) {
-			if (arrayImagenes[i].height < arrayImagenes[i].width) {
-				id = arrayImagenes[i].id;
-				serie.imagen = url_ + id + tam;
-				console.log(serie);
-				break;
-			}
-		}
-	});*/
-	//try {
-	console.log(serie);
 	await serieDriver.addSerie(serie);
 	res.redirect('/');
-	//} catch (e) {
-	//	res.redirect('comentarios/add?error=true');
-	//}
 });
 
 
@@ -122,12 +98,13 @@ router.get('/peliculas', async (req, res, next) => {
 	const url_ = '&page=1&include_adult=false';
 	const url_get = url + encodeURIComponent(id) + url_;
 
-	Request.get(url_get , (error, response, body) => {
+	Request.get(url_get, (error, response, body) => {
 		if (error) {
 			return console.dir(error);
 		}
 		const peliculas = JSON.parse(body);
 		const results = peliculas.results;
+		console.log(results);
 
 		res.render('peliculas', {
 			peliculas: results ? results : [],
@@ -145,7 +122,7 @@ router.get('/eliminar', async (req, res, next) => {
 	const data = req.session.passport;
 	console.log(data);
 	const email = data.profile.emails[0].value;
-	if(emailSerie === email){
+	if (emailSerie === email) {
 		console.log('PERMISO PARA ELIMINAR SERIE');
 		await serieDriver.deleteSerie(id);
 	}

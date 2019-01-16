@@ -14,6 +14,10 @@ router.get('/eliminar', async (req, res, next) => {
 	const id = req.query.id;
 	// Obtengo el email del usuario que ha creado el comentario
 	const emailComentario = await comentarioDriver.getUsuario(id);
+
+	// Obtengo el id de la serie a la que pertenece el comentario
+	const idSerieComentario = await comentarioDriver.getSerieId(id);
+
 	// Obtengo el email del usuario logueado
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
@@ -23,7 +27,7 @@ router.get('/eliminar', async (req, res, next) => {
 		// Elimino el comentario
 		await comentarioDriver.deleteComentario(id);
 	}
-	res.redirect('/');
+	res.redirect('/series/comentarios?id='+idSerieComentario);
 });
 
 
@@ -40,12 +44,13 @@ router.get('/add', (req, res, next) => {
 /* GET users listing. */
 router.post('/add', async (req, res, next) => {
 	// Obtengo la id de la serie a la que va a pertenecer mi comentario
-	const id = req.query.id;
+	const id = req.body.idSerie;
 	// Obtengo el email del usuario logueado para asociarlo al comentario
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
-	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
 
+	// Obtengo el id de la serie a la que pertenece el comentario
+	//const idSerieComentario = await comentarioDriver.getSerieId(id);
 
 	const comentario = {
 		titulo: req.body.titulo,
@@ -57,7 +62,7 @@ router.post('/add', async (req, res, next) => {
 
 	//try {
 	await comentarioDriver.addComentario(comentario);
-	res.redirect('/');
+	res.redirect('/series/comentarios?id='+req.body.idSerie);
 	//} catch (e) {
 	//	res.redirect('comentarios/add?error=true');
 	//}
@@ -120,11 +125,31 @@ router.post('/edit', async (req, res, next) => {
 	console.log("POST IDCOMENT: " + comentario.id);
 	//try {
 	await comentarioDriver.editComentario(comentario);
-	res.redirect('/');
+	res.redirect('/series/comentarios?id='+req.body.idSerie);
 	//} catch (e) {
 	//	res.redirect('comentarios/add?error=true');
 	//}
 });
 
+
+router.get('/misComentarios', async (req, res, next) => {
+
+    //obtengo el usuario de la sesion
+    const data = req.session.passport;
+    const email = data.profile.emails[0].value;
+
+	//obtengo las series que corresponden al usuario
+    const misComentarios = await comentarioDriver.getComentariosUsuario(email);
+
+	// Las muestro en series.jade
+	res.render('misComentarios', {
+		comentarios: misComentarios ? misComentarios : [],
+		emailLogged: email
+	});
+
+
+
+
+});
 
 module.exports = router;

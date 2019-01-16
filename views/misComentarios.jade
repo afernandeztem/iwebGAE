@@ -1,4 +1,13 @@
 extends layout
-
+include ./mixins/comentario
 block content
-  h1 "Aquí van mis Comentarios, Francis puto"
+    .card-group
+      each comentario in comentarios
+       if comentario.usuario === emailLogged
+           div
+           +comentario(comentario,false)
+           br
+       else
+           div
+           +comentario(comentario,true)
+           br

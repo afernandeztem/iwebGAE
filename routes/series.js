@@ -12,11 +12,54 @@ router.use(authMiddleware);
 router.get('/', async (req, res, next) => {
 	// Obtengo todas las series
 	const series = await serieDriver.getSeries();
+	const data = req.session.passport;
+	const emailUser = data.profile.emails[0].value;
 	// Las muestro en series.jade
 	res.render('series', {
-		series: series ? series : []
+		series: series ? series : [],
+		emailUsuario: emailUser
 	});
 });
+
+
+router.get('/editSerie', async (req,res,next) => {
+	const idSerie = req.query.id;
+	const serie = await serieDriver.getSerieById(idSerie);
+
+	res.render('editSerie', {
+		titulo: serie.titulo,
+		descripcion: serie.descripcion,
+		categoria: serie.categoria,
+		idSerie: idSerie
+	} )
+	
+}
+
+)
+
+router.post('/editSerie', async (req, res, next) => {
+
+	// Obtengo el email del usuario logueado para asociarlo al comentario
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
+
+
+
+	const serie = {
+		id: req.body.idSerie,
+		titulo: req.body.titulo,
+		categoria: req.body.categoria,
+		descripcion: req.body.descripcion,
+		usuario: email
+	}
+
+	await serieDriver.editSerie(serie);
+	res.redirect('/');
+
+});
+
+
 
 
 router.get('/add', async (req, res, next) => {

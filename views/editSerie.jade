@@ -1,0 +1,15 @@
+extends layout
+
+include ../views/mixins/serie
+
+block content
+	form.form-signin.text-center(method='post', action='/series/editSerie')
+		h1.h3.mb-3.font-weight-normal Editar Serie
+		label.sr-only(for='titulo') Título de la serie:
+		input#titulo.form-control(type='text', name='titulo', value=titulo, autofocus='autofocus')
+		label.sr-only(for='categoria') Categoría:
+		input#titulo.form-control(type='text', name='categoria', value=categoria)
+		label.sr-only(for='descripcion') Descripción:
+		textarea#descripcion.form-control(name='descripcion', value=descripcion)
+		input.form-control(type='hidden', name='idSerie', value=idSerie)
+		button.btn.btn-lg.btn-primary.btn-block(type='submit') Guardar

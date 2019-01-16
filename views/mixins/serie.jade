@@ -7,5 +7,8 @@ mixin serie(serie, button)
         | #{serie.descripcion}
       div(style={margin: '20px 10px 20px', position: 'absolute', left: '0px', bottom: '0px'})
         a.btn.btn-primary(style={margin: '10px'}, href='/series/comentarios?id=' + serie.id) Comentarios
+
+        a.btn.btn-secondary(href='/series/peliculas?id=' + serie.titulo) Películas
         if button
-            a.btn.btn-secondary(href='/series/peliculas?id=' + serie.titulo) Películas
+          a.btn.btn-primary(href='/series/eliminar?id=' + serie.id) Eliminar
+          a.btn.btn-primary(href='/series/editSerie?id=' + serie.id) Editar

@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.get('/editSerie', async (req,res,next) => {
+router.get('/editSerie', async (req, res, next) => {
 	const idSerie = req.query.id;
 	const serie = await serieDriver.getSerieById(idSerie);
 
@@ -34,11 +34,8 @@ router.get('/editSerie', async (req,res,next) => {
 		idSerie: idSerie,
 		imagen: serie.imagen
 
-	} )
-
-}
-
-)
+	});
+});
 
 router.post('/editSerie', async (req, res, next) => {
 
@@ -56,7 +53,8 @@ router.post('/editSerie', async (req, res, next) => {
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
 		imagen: req.body.imagenSerie,
-		usuario: email
+		usuario: email,
+		tituloLower: req.body.titulo.toLowerCase().replace(/\s/g, "")
 	}
 
 	await serieDriver.editSerie(serie);
@@ -86,10 +84,11 @@ router.post('/add', async (req, res, next) => {
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
 		usuario: email,
-		imagen: req.body.imagenSerie
+		imagen: req.body.imagenSerie,
+		tituloLower: req.body.titulo.toLowerCase().replace(/\s/g, "")
 	}
 
-	if(!serie.imagen){
+	if (!serie.imagen) {
 		const fetch = require('node-fetch');
 		const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';
 		const url_ = 'https://source.unsplash.com/';
@@ -190,28 +189,29 @@ router.post('/buscar', async (req, res, next) => {
 
 	console.log(parametro);
 
-	const series = await serieDriver.getSerieByParam(parametro);
+	const series = await serieDriver.getSerieByParam(parametro.toLowerCase().replace(/\s/g, ""));
 	// Las muestro en series.jade
 	res.render('series', {
-		series: series ? series : []
+		series: series ? series : [],
+		emailUsuario: email
 	});
 });
 
 router.get('/misSeries', async (req, res, next) => {
 
-    //obtengo el usuario de la sesion
-    const data = req.session.passport;
-    const email = data.profile.emails[0].value;
+	//obtengo el usuario de la sesion
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
 	const emailUser = data.profile.emails[0].value;
 
-    //obtengo las series que corresponden al usuario
-    const misSeries = await serieDriver.getSeriesUsuario(email);
+	//obtengo las series que corresponden al usuario
+	const misSeries = await serieDriver.getSeriesUsuario(email);
 
 	// Las muestro en series.jade
 	res.render('series', {
 		series: misSeries ? misSeries : [],
 		emailUsuario: emailUser
-    });
+	});
 });
 
 router.get('/entregas', async (req, res, next) => {

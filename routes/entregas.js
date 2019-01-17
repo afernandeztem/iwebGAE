@@ -11,9 +11,9 @@ router.get('/', async(req, res, next) => {
 	//obtengo el usuario de la sesion
     const data = req.session.passport;
 	const email = data.profile.emails[0].value;
-	const misEntregas = await entregaDriver.getEntregasUsuario(email);
-	
 	const emailUser = data.profile.emails[0].value;
+	
+	const misEntregas = await entregaDriver.getEntregasUsuario(email);
 	console.log(emailUser);
 	
 

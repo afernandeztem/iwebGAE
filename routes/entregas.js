@@ -14,10 +14,6 @@ router.get('/', async(req, res, next) => {
 	const emailUser = data.profile.emails[0].value;
 
 	const misEntregas = await entregaDriver.getEntregasUsuario(email);
-	console.log(emailUser);
-
-
-	console.log(misEntregas);
 
 	res.render('entregas', {
 		entregas: misEntregas ? misEntregas : [],
@@ -90,6 +86,33 @@ router.post('/add', async (req, res, next) => {
 	res.redirect('/entregas');
 });
 
+router.get('/editEntrega', async (req, res, next) => {
+	const idEntrega = req.query.id;
+	const entrega = await entregaDriver.getEntregaById(idEntrega);
 
+	res.render('editEntrega', {
+		anotacion: entrega.anotacion,
+		fechaEntrega: entrega.fecha_entrega
+	});
+});
+
+router.post('/editEntrega', async (req, res, next) => {
+
+	// Obtengo el email del usuario logueado para asociarlo al comentario
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
+
+	const entrega = {
+		id: req.body.idEntrega,
+		anotacion: req.body.anotacion,
+		fechaEntrega: req.body.fecha_entrega,
+		usuario: email
+	}
+
+	await entregaDriver.editEntrega(entrega);
+	res.redirect('/entregas');
+
+});
 
 module.exports = router;

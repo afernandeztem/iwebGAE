@@ -1,8 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  a(href='/auth/google') Login with Google
-  if logout
-    p Te has desconectado correctamente :)
+
+  form.form-signin.text-center.col-sm-6.offset-sm-3(method='post', action='login')
+    h1.h3.mb-3.font-weight-normal Drawdede
+    a.btn.btn-lg.btn-primary.btn-block.btn-danger(href="/auth/google") Login with Google
+
+    if error
+      div.alert.alert-danger(role='alert') User not valid :(
+
+    if logout
+      div.alert.alert-success(role='alert') Logout completed!

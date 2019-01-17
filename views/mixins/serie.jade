@@ -5,11 +5,10 @@ mixin serie(serie, button)
       h5.card-title #{serie.titulo}
       p.card-text
         | #{serie.descripcion}
-      div(style={margin: '20px 10px 20px', position: 'absolute', left: '0px', bottom: '0px'})
-        a.btn.btn-primary(style={margin: '10px'}, href='/series/comentarios?id=' + serie.id) Comentarios
-        a.btn.btn-primary(style={margin: '10px'}, href='/series/entregas?id=' + serie.id) Entregas
-
-        a.btn.btn-secondary(href='/series/peliculas?id=' + serie.titulo) Películas
+      div(style={position: 'absolute', left: '20px', bottom: '0px'})
+        a.btn.btn-outline-primary(style={margin: '0px 10px 10px 0px'}, href='/series/comentarios?id=' + serie.id) Comentarios
+        a.btn.btn-outline-primary(style={margin: '0px 10px 10px 0px'}, href='/series/entregas?id=' + serie.id) Entregas
+        a.btn.btn-outline-primary(href='/series/peliculas?id=' + serie.titulo,style={margin: '0px 10px 10px 0px'}) Películas
         if button
-          a.btn.btn-primary(href='/series/eliminar?id=' + serie.id) Eliminar
-          a.btn.btn-primary(href='/series/editSerie?id=' + serie.id) Editar
+          a.btn.btn-outline-warning(href='/series/editSerie?id=' + serie.id,style={margin: '0px 10px 10px 0px'}) Editar
+          a.btn.btn-outline-danger(href='/series/eliminar?id=' + serie.id,style={margin: '0px 10px 10px 0px'}) Eliminar

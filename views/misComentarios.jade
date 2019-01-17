@@ -1,7 +1,6 @@
 extends layout
 include ./mixins/comentario
 block content
-    .card-group
       each comentario in comentarios
        if comentario.usuario === emailLogged
            div

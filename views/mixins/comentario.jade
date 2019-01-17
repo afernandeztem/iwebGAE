@@ -1,12 +1,12 @@
 mixin comentario(comentario,intrusion)
-   .material-card
-    .card-body
        - const id = comentario.id
-       h5.card-title #{comentario.titulo}
-       h7.card-text #{comentario.usuario}
-       p.card-text #{comentario.contenido}
-       if !intrusion
-            a(href='/comentarios/edit?id=' + id ) Editar
+       div.alert.alert-primary(style={margin: '10px 20px 0px 20px'})
+           h7.card-text #{comentario.usuario}
+           h5.card-title #{comentario.titulo}
+       div.alert.alert-light(style={margin: '10px 20px 0px 20px', border: 'solid'})
+           p.card-text #{comentario.contenido}
+           if !intrusion
+            a(href='/comentarios/edit?id=' + id , style='	') Editar
             a(href='/comentarios/eliminar?id=' + id ) Eliminar
        br
        br

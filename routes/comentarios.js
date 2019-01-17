@@ -121,7 +121,9 @@ router.post('/edit', async (req, res, next) => {
 		titulo: req.body.titulo,
 		contenido: req.body.contenido,
 		idSerie: req.body.idSerie,
-		usuario: req.body.usuario
+		usuario: req.body.usuario,
+		nombreUsuario: data.profile.displayName,
+		imagen: data.profile.photos[0].value
 	}
 
 	console.log("POST IDCOMENT: " + comentario.id);

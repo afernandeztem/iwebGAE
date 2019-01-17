@@ -11,5 +11,7 @@ block content
 		input#titulo.form-control(type='text', name='categoria', placeholder='Categoría', value=serie.categoria)
 		label.sr-only(for='descripcion') Descripción:
 		textarea#descripcion.form-control(name='descripcion', placeholder='Contenido del comentario', value=serie.descripcion)
+		label.sr-only(for='imagenSerie') Imagen:
+		input#imagenSerie.form-control(type='text', name='imagenSerie',value=imagenSerie, placeholder='URL Imagen')
 		input.form-control(type='hidden', name='idSerie', value=id)
 		button.btn.btn-lg.btn-primary.btn-block(type='submit') Guardar

@@ -31,7 +31,8 @@ router.get('/editSerie', async (req,res,next) => {
 		titulo: serie.titulo,
 		descripcion: serie.descripcion,
 		categoria: serie.categoria,
-		idSerie: idSerie
+		idSerie: idSerie,
+		imagen: serie.imagen
 		
 	} )
 	
@@ -46,13 +47,15 @@ router.post('/editSerie', async (req, res, next) => {
 	const email = data.profile.emails[0].value;
 	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
 
-
+	
+	
 
 	const serie = {
 		id: req.body.idSerie,
 		titulo: req.body.titulo,
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
+		imagen: req.body.imagenSerie,
 		usuario: email
 	}
 
@@ -83,30 +86,33 @@ router.post('/add', async (req, res, next) => {
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
 		usuario: email,
-		imagen: '/drawable/nyan.png'
+		imagen: req.body.imagenSerie
 	}
 
-	const fetch = require('node-fetch');
-	const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';
-	const url_ = 'https://source.unsplash.com/';
-	const tam = '/290x160';
-	const url_get = url + encodeURIComponent(serie.titulo);
+	if(!serie.imagen){
+		const fetch = require('node-fetch');
+		const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';
+		const url_ = 'https://source.unsplash.com/';
+		const tam = '/290x160';
+		const url_get = url + encodeURIComponent(serie.titulo);
 
-	await fetch(url_get)
-		.then((ress) => ress.json())
-		.then((json) => {
-			const imagenes = json;
-			const arrayImagenes = imagenes.results;
-			let id;
+		await fetch(url_get)
+			.then((ress) => ress.json())
+			.then((json) => {
+				const imagenes = json;
+				const arrayImagenes = imagenes.results;
+				let id;
 
-			for (let i = 0; i < arrayImagenes.length; i++) {
-				if (arrayImagenes[i].height < arrayImagenes[i].width) {
-					id = arrayImagenes[i].id;
-					serie.imagen = url_ + id + tam;
-					break;
+				for (let i = 0; i < arrayImagenes.length; i++) {
+					if (arrayImagenes[i].height < arrayImagenes[i].width) {
+						id = arrayImagenes[i].id;
+						serie.imagen = url_ + id + tam;
+						break;
+					}
 				}
-			}
-		});
+			});
+	}
+	
 	await serieDriver.addSerie(serie);
 	res.redirect('/');
 });

@@ -8,8 +8,10 @@ block content
 		label.sr-only(for='titulo') Título de la serie:
 		input#titulo.form-control(type='text', name='titulo', value=titulo, autofocus='autofocus')
 		label.sr-only(for='categoria') Categoría:
-		input#titulo.form-control(type='text', name='categoria', value=categoria)
+		input#categoria.form-control(type='text', name='categoria', value=categoria)
 		label.sr-only(for='descripcion') Descripción:
 		textarea#descripcion.form-control(name='descripcion', value=descripcion)
+		label.sr-only(for='imagenSerie') Imagen:
+		input#imagenSerie.form-control(type='text', name='imagenSerie', value=imagen)
 		input.form-control(type='hidden', name='idSerie', value=idSerie)
 		button.btn.btn-lg.btn-primary.btn-block(type='submit') Guardar

@@ -5,16 +5,12 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   body
-  .navbar.navbar-inverse.bg-inverse
-      .container.d-flex.justify-content-between
-        a.navbar-brand(href='/') Drawdede
+  .navbar.navbar-dark.bg-dark
+        a.navbar-brand(style={color: '#fff',font: 'Pacifico'},href='/') Drawdede
         if passport
           a.navbar-brand(href='/misSeries/') Mis Series
-          a.navbar-brand(href='/misEntregas') Mis Entregas
+          a.navbar-brand(href='/entregas') Mis Entregas
           a.navbar-brand(href='/comentarios/misComentarios') Mis Comentarios
-          form.form-inline(method='post', action='/series/buscar')
-            input.form-control.mr-sm-2(type='search', placeholder=' Buscar', name='parametro')
-            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Buscar
           a.navbar-brand(href='/logout') Logout
           a.navbar-brand(href='/series/add') Nueva Serie
     block content

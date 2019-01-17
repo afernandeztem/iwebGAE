@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', loginRouter);
 app.use('/series', seriesRouter);
-app.use('/', misEntregasRouter);
+app.use('/entregas', misEntregasRouter);
 app.use('/comentarios', comentariosRouter);
 app.use('/api', api);
 app.use('/', misSeriesRouter);

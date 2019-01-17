@@ -3,6 +3,10 @@ extends layout
 include ./mixins/entrega
 
 block content
+    div(align='center')
+        form.form-inline(method='post', action='/entregas/buscar')
+            input.form-control.mr-sm-2(type='search', placeholder='Busca cualquier entrega', name='parametro')
+            button.btn.btn-outline-dark(type='submit', style={margin: ' 0px 0px 25px 0px'}) Buscar
   .card-columns(style={padding:'10px', position: 'relative'})
       each entrega in entregas
         div

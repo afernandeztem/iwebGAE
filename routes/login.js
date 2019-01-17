@@ -26,16 +26,20 @@ router.get('/auth/google/callback',
 		const data = req.session.passport;
 		const email = data.profile.emails[0].value;
 		const nombre = data.profile.displayName;
+
+		const imagen = data.profile.photos[0].value;
+
 		// Espero a que mi usuario sea encontrado en la BD o sea []
 		let usuario = await usuarioDriver.getUsuario(email);
 		// Si el array que me devuelve la BD está vacío, quiere decir que el usuario no existe, lo creo
 		if (usuario.length === 0) {
-			await usuarioDriver.addUsuario(email, nombre);
-			console.log('Usuario insertado correctamente!!!!!!!!!!!!!!!!!!!!!!!');
+			await usuarioDriver.addUsuario(email, nombre, imagen);
+			console.log('Usuario creado correctamente.');
 			usuario = await usuarioDriver.getUsuario(email);
 		}
-		//Muestro los datos del usuario por consola porque me apetece
-		console.log('USUARIO LOGEADO');
+
+		//Muestro los datos del usuario por consola
+		console.log('El usuario ' + email + ' ha iniciado sesión correctamente.');
 		console.log(usuario);
 		res.redirect('/series');
 	}

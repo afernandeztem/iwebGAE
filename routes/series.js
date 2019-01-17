@@ -33,9 +33,9 @@ router.get('/editSerie', async (req,res,next) => {
 		categoria: serie.categoria,
 		idSerie: idSerie,
 		imagen: serie.imagen
-		
+
 	} )
-	
+
 }
 
 )
@@ -47,8 +47,8 @@ router.post('/editSerie', async (req, res, next) => {
 	const email = data.profile.emails[0].value;
 	// Creo un comentario predefinido (hay que hacer un formulario) y le asocio el email y la id de la serie
 
-	
-	
+
+
 
 	const serie = {
 		id: req.body.idSerie,
@@ -112,7 +112,7 @@ router.post('/add', async (req, res, next) => {
 				}
 			});
 	}
-	
+
 	await serieDriver.addSerie(serie);
 	res.redirect('/');
 });

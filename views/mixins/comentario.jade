@@ -1,7 +1,8 @@
 mixin comentario(comentario,intrusion)
        - const id = comentario.id
        div.alert.alert-primary(style={margin: '10px 20px 0px 20px'})
-           h7.card-text #{comentario.usuario}
+           img.card-img-left(src=comentario.imagen, alt='Card image cap', height='50px', width='50px')(style={margin: '4px 4px 4px 4px', 'border-radius': '25px'})
+           h7.card-text #{comentario.nombreUsuario}
            h5.card-title #{comentario.titulo}
        div.alert.alert-light(style={margin: '10px 20px 0px 20px', border: 'solid'})
            p.card-text #{comentario.contenido}

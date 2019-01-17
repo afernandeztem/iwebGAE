@@ -56,7 +56,9 @@ router.post('/add', async (req, res, next) => {
 		titulo: req.body.titulo,
 		contenido: req.body.contenido,
 		idSerie: req.body.idSerie,
-		usuario: email
+		usuario: email,
+		nombreUsuario: data.profile.displayName,
+		imagen: data.profile.photos[0].value
 	}
 
 
@@ -144,7 +146,9 @@ router.get('/misComentarios', async (req, res, next) => {
 	// Las muestro en series.jade
 	res.render('misComentarios', {
 		comentarios: misComentarios ? misComentarios : [],
-		emailLogged: email
+		emailLogged: email,
+		usuario: data.profile.displayName,
+		imagen: data.profile.photos[0].value
 	});
 
 

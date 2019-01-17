@@ -5,9 +5,9 @@ include ../views/mixins/comentario
 block content
 	form.form-signin.text-center(method='post', action='/comentarios/edit')
 		h1.h3.mb-3.font-weight-normal Editar comentario
-		label.sr-only(for='titulo') Título del comentario:
+		label(for='titulo') Título del comentario:
 		input#titulo.form-control(type='text', name='titulo', autofocus='autofocus', value=comentario.titulo)
-		label.sr-only(for='contenido') Contenido:
+		label(for='contenido') Contenido:
 		textarea#contenido.form-control(type='text', name='contenido', value=comentario.contenido)
 		input.form-control(type='hidden', name='idComent', value=comentario.id)
 		input.form-control(type='hidden', name='idSerie', value=comentario.idSerie)

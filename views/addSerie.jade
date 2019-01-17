@@ -7,13 +7,13 @@ block content
 		h1.h3.mb-3.font-weight-normal Formulario
 		div.form-group
 			label(for='titulo') Título de la serie:
-			input#titulo.form-control(type='text', name='titulo', placeholder='Título', autofocus='autofocus', value=serie.titulo)
+			input#titulo.form-control(type='text', name='titulo', placeholder='Título', autofocus='autofocus', value=serie.titulo, required)
 		div.form-group
 			label(for='categoria') Categoría:
-			input#titulo.form-control(type='text', name='categoria', placeholder='Categoría', value=serie.categoria)
+			input#titulo.form-control(type='text', name='categoria', placeholder='Categoría', value=serie.categoria, required)
 		div.form-group
 			label(for='descripcion') Descripción:
-			textarea#descripcion.form-control(name='descripcion', placeholder='Contenido del comentario', value=serie.descripcion)
+			textarea#descripcion.form-control(name='descripcion', placeholder='Contenido del comentario', value=serie.descripcion, required)
 		div.form-group
 			label(for='imagenSerie') Imagen:
 			input#imagenSerie.form-control(type='text', name='imagenSerie',value=imagenSerie, placeholder='URL Imagen')

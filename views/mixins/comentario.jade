@@ -3,11 +3,12 @@ mixin comentario(comentario,intrusion)
        div.alert.alert-primary(style={margin: '10px 20px 0px 20px'})
            img.card-img-left(src=comentario.imagen, alt='Card image cap', height='50px', width='50px')(style={margin: '4px 4px 4px 4px', 'border-radius': '25px'})
            h7.card-text #{comentario.nombreUsuario}
-           h5.card-title #{comentario.titulo}
+           h3.card-title
+            strong #{comentario.titulo}
        div.alert.alert-light(style={margin: '10px 20px 0px 20px', border: 'solid'})
            p.card-text #{comentario.contenido}
            if !intrusion
-            a(href='/comentarios/edit?id=' + id , style='	') Editar
-            a(href='/comentarios/eliminar?id=' + id ) Eliminar
+            a.btn.btn-outline-warning(href='/comentarios/edit?id=' + id, style={margin: '0px 10px 10px 0px'}) Editar
+            a.btn.btn-outline-danger(href='/comentarios/eliminar?id=' + id, style={margin: '0px 10px 10px 0px'}) Eliminar
        br
        br

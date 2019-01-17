@@ -3,11 +3,14 @@ block content
   h1 Peliculas relacionadas con #{idSerie}:
     br
     br
-    .card-columns(style={padding: '10px', position: 'relative'})
-        each pelicula in peliculas
-           .card(style={width: '100%', margin: '0 auto', margin: '20px', height: '950px'})
-            img.card-img-top(src='https://image.tmdb.org/t/p/w600_and_h900_bestv2'+ pelicula.poster_path, alt='Card image cap',height='260', width='290')
-            .card-body
+    if peliculas.length === 0
+        div.alert.alert-danger(role='alert', style={margin: '0px 300px'}) No hay series que mostrar
+    else
+        .card-columns(style={padding: '10px', position: 'relative'})
+            each pelicula in peliculas
+               .card(style={width: '100%', margin: '0 auto', margin: '20px', height: '950px'})
+                img.card-img-top(src='https://image.tmdb.org/t/p/w600_and_h900_bestv2'+ pelicula.poster_path, alt='Card image cap',height='260', width='290')
+                .card-body
                    h3 Título: #{pelicula.original_title}
                    h3 Sinopsis:  #{pelicula.overview}
                    br

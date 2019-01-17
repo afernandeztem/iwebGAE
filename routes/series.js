@@ -3,6 +3,7 @@ const router = express.Router();
 const authMiddleware = require('../middlewares/auth');
 const serieDriver = require('../lib/datastore/serie-driver');
 const comentarioDriver = require('../lib/datastore/comentarios-driver');
+const entregaDriver = require('../lib/datastore/entrega-driver');
 
 
 router.use(authMiddleware);
@@ -205,6 +206,21 @@ router.get('/misSeries', async (req, res, next) => {
 		series: misSeries ? misSeries : [],
 		emailUsuario: emailUser
     });
+});
+
+router.get('/entregas', async (req, res, next) => {
+	// Obtengo la id de la serie
+	const id = req.query.id;
+	// Obtengo las entregas que tienen como dueño a esa serie
+	const entregas = await entregaDriver.getEntregasSerie(id);
+	//Obtengo el email para ver si soy el dueño del comentario
+	const data = req.session.passport;
+	const emailUser = data.profile.emails[0].value;
+
+	res.render('entregas', {
+		entregas: entregas ? entregas : [],
+		emailUsuario: emailUser
+	});
 });
 
 module.exports = router;

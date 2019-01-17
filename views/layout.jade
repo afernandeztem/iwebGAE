@@ -9,8 +9,8 @@ html
       .container.d-flex.justify-content-between
         a.navbar-brand(href='/') Drawdede
         if passport
-          a.navbar-brand(href='/misSeries/') Mis Series
-          a.navbar-brand(href='/misEntregas') Mis Entregas
+          a.navbar-brand(href='/series/misSeries') Mis Series
+          a.navbar-brand(href='/entregas/misEntregas') Mis Entregas
           a.navbar-brand(href='/comentarios/misComentarios') Mis Comentarios
           form.form-inline(method='post', action='/series/buscar')
             input.form-control.mr-sm-2(type='search', placeholder=' Buscar', name='parametro')

@@ -21,4 +21,22 @@ router.get('/misEntregas', async(req, res, next) => {
 	});
 });
 
+router.get('/eliminar', async (req, res, next) => {
+	//id de la serie
+	const id = req.query.id;
+	// Obtengo el email del usuario que ha creado la serie
+	const emailEntrega = await entregaDriver.getUsuarioEntrega(id);
+
+	const data = req.session.passport;
+	console.log(data);
+	const email = data.profile.emails[0].value;
+	if (emailEntrega === email) {
+		console.log('PERMISO PARA ELIMINAR ENTREGA');
+		await entregaDriver.deleteEntrega(id);
+	}
+
+
+	res.redirect('/entregas');
+});
+
 module.exports = router;

@@ -225,7 +225,8 @@ router.get('/entregas', async (req, res, next) => {
 
 	res.render('entregas', {
 		entregas: entregas ? entregas : [],
-		emailUsuario: emailUser
+		emailUsuario: emailUser,
+		idSerie: id
 	});
 });
 

@@ -15,7 +15,7 @@ router.get('/misEntregas', async(req, res, next) => {
 
 	const misEntregas = await entregaDriver.getEntregasUsuario(email);
 
-	res.render('misEntregas', {
+	res.render('entregas', {
 		entregas: misEntregas ? misEntregas : [],
 		emailUsuario: emailUser
 	});

@@ -9,9 +9,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const seriesRouter = require('./routes/series');
-const misEntregasRouter = require('./routes/misEntregas');
+const misEntregasRouter = require('./routes/entregas');
 const comentariosRouter = require('./routes/comentarios');
-const misSeriesRouter= require('./routes/misSeries');
+const misSeriesRouter= require('./routes/series');
 const api = require('./routes/api');
 
 

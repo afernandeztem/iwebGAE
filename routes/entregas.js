@@ -31,12 +31,12 @@ router.post('/buscar', async (req, res, next) => {
 
 	console.log(parametro);
 
-	const entregas = await entregaDriver.getEntregaByParam(parametro, email);
+	const entregas = await entregaDriver.getEntregaByParam(parametro.toLowerCase().replace(/\s/g, ""), email);
 
 	console.log(entregas);
 	// Las muestro en series.jade
 	res.render('entregas', {
-		series: entregas ? entregas : []
+		entregas: entregas ? entregas : []
 	});
 });
 
@@ -92,7 +92,8 @@ router.post('/add', async (req, res, next) => {
 		anotacion: req.body.anotacion,
 		fecha_entrega: req.body.fechaEntrega,
 		usuario: email,
-		idSerie: req.body.idSerie
+		idSerie: req.body.idSerie,
+		anotacionLower: req.body.anotacion.toLowerCase().replace(/\s/g, "")
 	}
 
 
@@ -135,7 +136,8 @@ router.post('/editEntrega', async (req, res, next) => {
 		anotacion: req.body.anotacion,
 		idSerie: req.body.idSerie,
 		fecha_entrega: req.body.fechaEntrega,
-		usuario: email
+		usuario: email,
+		anotacionLower: req.body.anotacion.toLowerCase().replace(/\s/g, "")
 	}
 
 	await entregaDriver.editEntrega(entrega);

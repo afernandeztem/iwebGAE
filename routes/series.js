@@ -78,17 +78,22 @@ router.post('/add', async (req, res, next) => {
 	// Obtengo el email del usuario logueado para asociarlo al a la serie
 	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
+	let imagen = req.body.imagenSerie;
+	if(!imagen){
+		imagen = '/drawable/no-image-found.jpg';
+	}
 
 	const serie = {
 		titulo: req.body.titulo,
 		categoria: req.body.categoria,
 		descripcion: req.body.descripcion,
 		usuario: email,
-		imagen: req.body.imagenSerie,
+		imagen: imagen,
 		tituloLower: req.body.titulo.toLowerCase().replace(/\s/g, "")
 	}
-
-	if (!serie.imagen) {
+	
+	if (serie.imagen===imagen) {
+		
 		const fetch = require('node-fetch');
 		const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';
 		const url_ = 'https://source.unsplash.com/';
@@ -173,6 +178,11 @@ router.get('/eliminar', async (req, res, next) => {
 	const email = data.profile.emails[0].value;
 	if (emailSerie === email || email === 'pruebaparaingweb@gmail.com') {
 		console.log('PERMISO PARA ELIMINAR SERIE');
+		let entregasSerie = await entregaDriver.getEntregasSerie(id);
+		console.log(entregasSerie);
+		for (let i = 0; i < entregasSerie.length;i++){
+			await entregaDriver.deleteEntrega(entregasSerie[i].id)
+		}
 		await serieDriver.deleteSerie(id);
 	}
 
@@ -229,5 +239,7 @@ router.get('/entregas', async (req, res, next) => {
 		idSerie: id
 	});
 });
+
+
 
 module.exports = router;

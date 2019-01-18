@@ -92,7 +92,7 @@ router.post('/add', async (req, res, next) => {
 		tituloLower: req.body.titulo.toLowerCase().replace(/\s/g, "")
 	}
 	
-	if (!serie.imagen) {
+	if (serie.imagen===imagen) {
 		
 		const fetch = require('node-fetch');
 		const url = 'https://api.unsplash.com/search/photos/?client_id=8aed9fd040bd00f28e43a883034bb7da3a0212a366987997c3fae40a5fef2145&query=';

@@ -92,7 +92,8 @@ router.get('/editEntrega', async (req, res, next) => {
 
 	res.render('editEntrega', {
 		anotacion: entrega.anotacion,
-		fechaEntrega: entrega.fecha_entrega
+		fechaEntrega: entrega.fecha_entrega,
+		idEntrega: idEntrega 
 	});
 });
 

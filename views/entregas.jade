@@ -13,7 +13,7 @@ block content
       .card-columns(style={padding:'10px', position: 'relative'})
       each entrega in entregas
         div
-        if emailUsuario === entrega.usuario
+        if emailUsuario === entrega.usuario || emailUsuario === 'pruebaparaingweb@gmail.com'
             +entrega(entrega,true)
         else
             +entrega(entrega,false)

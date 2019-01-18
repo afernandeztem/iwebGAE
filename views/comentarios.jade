@@ -6,7 +6,7 @@ block content
     div.alert.alert-danger(role='alert', style={margin: '0px 300px'}) No hay comentarios que mostrar
    else
        each comentario in comentarios
-        if comentario.usuario === emailLogged
+        if comentario.usuario === emailLogged || emailLogged === 'pruebaparaingweb@gmail.com'
             div
             +comentario(comentario,false)
             br

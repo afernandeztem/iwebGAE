@@ -3,12 +3,15 @@ extends layout
 include ../views/mixins/entrega
 
 block content
-	form.form-signin.text-center(method='post', action='/entregas/editEntrega')
-		h1.h3.mb-3.font-weight-normal Editar Entrega
-		label(for='anotacion') Anotacion de la entrega:
-		input#anotacion.form-control(type='text', name='anotacion', value=anotacion, autofocus='autofocus', required)
-		label(for='fechaEntrega') Fecha de Entrega:
-		input#fechaEntrega.form-control(type='date', name='fechaEntrega', value=fecha_entrega, required)
-		input.form-control(type='hidden', name='idEntrega', value=idEntrega)
-		input.form-control(type='hidden', name='idSerie', value=idSerie)
-		button.btn.btn-lg.btn-primary.btn-block(type='submit') Guardar
+	if error
+		div.alert.alert-danger(role='alert', style={margin: '0px 300px'}) No puedes editar esta entrega
+	else
+		form.form-signin.text-center(method='post', action='/entregas/editEntrega')
+			h1.h3.mb-3.font-weight-normal Editar Entrega
+			label(for='anotacion') Anotacion de la entrega:
+			input#anotacion.form-control(type='text', name='anotacion', value=anotacion, autofocus='autofocus', required)
+			label(for='fechaEntrega') Fecha de Entrega:
+			input#fechaEntrega.form-control(type='date', name='fechaEntrega', value=fecha_entrega, required)
+			input.form-control(type='hidden', name='idEntrega', value=idEntrega)
+			input.form-control(type='hidden', name='idSerie', value=idSerie)
+			button.btn.btn-lg.btn-primary.btn-block(type='submit') Guardar

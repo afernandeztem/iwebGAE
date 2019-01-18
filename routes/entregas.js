@@ -90,11 +90,22 @@ router.get('/editEntrega', async (req, res, next) => {
 	const idEntrega = req.query.id;
 	const entrega = await entregaDriver.getEntregaById(idEntrega);
 
+	//obtengo e usuario de sesion para comparar
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+	let error = false;
+
+	if(entrega.usuario != email){
+		//si no es mi entrega error
+		error = true;
+	}
+	
 	res.render('editEntrega', {
 		anotacion: entrega.anotacion,
 		fechaEntrega: entrega.fecha_entrega,
 		idSerie: entrega.idSerie,
-		idEntrega: idEntrega 
+		idEntrega: idEntrega,
+		error: error
 	});
 });
 

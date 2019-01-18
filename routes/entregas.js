@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const entregaDriver = require('../lib/datastore/entrega-driver');
+const serieDriver = require('../lib/datastore/serie-driver');
 const authMiddleware = require('../middlewares/auth');
 
 router.use(authMiddleware);
@@ -61,10 +62,24 @@ router.get('/eliminar', async (req, res, next) => {
 });
 
 router.get('/add', async (req, res, next) => {
+	const idSerie = req.query.id;
+	//obtengo el email del que esta en sesion
+	const data = req.session.passport;
+	const email = data.profile.emails[0].value;
+
+	let error = false;
+	usuarioSerie = await serieDriver.getUsuarioSerie(idSerie);
+	
+	console.log(idSerie+error + email + usuarioSerie );
+	if(email != usuarioSerie){
+		error= true;
+	}
+
 	res.render('addEntrega', {
 		title: 'Add entrega',
-		id: req.query.id,
-		entrega: {}
+		id: idSerie,
+		entrega: {},
+		error: error
 	});
 });
 

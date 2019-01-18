@@ -93,6 +93,7 @@ router.get('/editEntrega', async (req, res, next) => {
 	res.render('editEntrega', {
 		anotacion: entrega.anotacion,
 		fechaEntrega: entrega.fecha_entrega,
+		idSerie: entrega.idSerie,
 		idEntrega: idEntrega 
 	});
 });
@@ -107,7 +108,8 @@ router.post('/editEntrega', async (req, res, next) => {
 	const entrega = {
 		id: req.body.idEntrega,
 		anotacion: req.body.anotacion,
-		fechaEntrega: req.body.fecha_entrega,
+		idSerie: req.body.idSerie,
+		fecha_entrega: req.body.fechaEntrega,
 		usuario: email
 	}
 

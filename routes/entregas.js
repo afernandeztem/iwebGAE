@@ -7,10 +7,10 @@ const authMiddleware = require('../middlewares/auth');
 router.use(authMiddleware);
 
 /* GET users listing. */
-router.get('/', async(req, res, next) => {
+router.get('/', async (req, res, next) => {
 
 	//obtengo el usuario de la sesion
-    const data = req.session.passport;
+	const data = req.session.passport;
 	const email = data.profile.emails[0].value;
 	const emailUser = data.profile.emails[0].value;
 
@@ -58,7 +58,7 @@ router.get('/eliminar', async (req, res, next) => {
 	}
 
 
-	res.redirect('/series/entregas?id='+ idSerie);
+	res.redirect('/series/entregas?id=' + idSerie);
 });
 
 router.get('/add', async (req, res, next) => {
@@ -68,11 +68,10 @@ router.get('/add', async (req, res, next) => {
 	const email = data.profile.emails[0].value;
 
 	let error = false;
-	usuarioSerie = await serieDriver.getUsuarioSerie(idSerie);
-	
-	console.log(idSerie+error + email + usuarioSerie );
-	if(email != usuarioSerie){
-		error= true;
+	const usuarioSerie = await serieDriver.getUsuarioSerie(idSerie);
+
+	if (email !== usuarioSerie && email !== 'pruebaparaingweb@gmail.com') {
+		error = true;
 	}
 
 	res.render('addEntrega', {
@@ -110,7 +109,7 @@ router.get('/editEntrega', async (req, res, next) => {
 	const email = data.profile.emails[0].value;
 	let error = false;
 
-	if(entrega.usuario !== email && email !== 'pruebaparaingweb@gmail.com'){
+	if (entrega.usuario !== email && email !== 'pruebaparaingweb@gmail.com') {
 		//si no es mi entrega error
 		error = true;
 	}

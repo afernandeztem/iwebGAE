@@ -5,7 +5,6 @@ Drawdede version Google App Engine
 ## Installation
 
 ```
-git clone https://github.com/RodriRR/iwebGAE.git
 cd iwebGAE
 npm install
 ```
